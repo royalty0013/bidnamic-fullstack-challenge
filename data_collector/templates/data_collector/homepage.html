@@ -1,0 +1,86 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+    
+    <div class="wizard-main">
+        <a role="button" class="btn btn-link" href="{% url 'data_collector:applications' %}" style="color: #00b9c5;"><i class="fa fa-list" aria-hidden="true"></i> View applications</a>
+        <span style="font-weight: bold;"> Welcome, {{user.first_name}} {{user.last_name}}</span>
+        <div class="container">
+            <div class="row">
+            </div>
+            <div class="row">
+                <div class="col-lg-6 banner-sec">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img class="d-block img-fluid" src="{% static 'images/slider-01.png' %}" alt="First slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <div class="banner-text">
+                                        <h2>Volcam</h2>
+                                        <p>Volcom boosts their ROAS by 34% using Bidnamic’s machine learning solution</p>
+                                    </div>	
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block img-fluid" src="{% static 'images/slider-02.png' %}" alt="First slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <div class="banner-text">
+                                        <h2>Polly</h2>
+                                        <p>Oh Polly increased revenue 661% smashing their Smart Shopping glass ceiling</p>
+                                    </div>	
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block img-fluid" src="{% static 'images/slider-03.png' %}" alt="First slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <div class="banner-text">
+                                        <h2>Shrine</h2>
+                                        <p>SHRINE achieved a 93% impression share using Bidnamic’s purchase intent engine</p>
+                                    </div>	
+                                </div>
+                            </div>
+                        </div>	   
+                    </div>
+                </div>
+                <div class="col-lg-6 login-sec">
+                    <div class="login-sec-bg">
+                        <h2 class="text-center">Register with us today !!!</h2>
+                        <form id="mpform" action="{% url 'data_collector:form_handler' %}" method="post" style="display: none;">
+                            {% csrf_token %}
+                            <h3>Account</h3>
+                            <fieldset class="form-input">
+                                <h4>Account Information</h4>
+                                {{form.title|as_crispy_field}}
+                                {{form.first_name|as_crispy_field}}
+                                {{form.surname|as_crispy_field}}
+                            </fieldset>
+                            <h3>Profile</h3>
+                            <fieldset class="form-input">
+                                <h4>Profile Information</h4>
+                                {{form.date_of_birth|as_crispy_field}}
+                                <span class="v-error"> you are below 18, sorry you can proceed </span>
+                                {{form.telephone|as_crispy_field}}
+                                {{form.address|as_crispy_field}}
+                            </fieldset>
+                            <h3>Finish</h3>
+                            <fieldset class="form-input">
+                                {{form.company_name|as_crispy_field}}
+                                {{form.bidding_settings|as_crispy_field}}
+                                {{form.google_ads_account_id|as_crispy_field}}
+                            </fieldset>
+                        </form>			
+                    </div>
+                </div>			
+            </div>
+        </div>
+    </div>
+{% endblock %}

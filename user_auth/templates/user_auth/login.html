@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Login Page {% endblock %}
+
+{% block content %}
+
+    <div id="main-login" class="mx-auto">
+        <h3> Sign in </h3>
+        <div class="form-body card card-body" style="border: 1px solid black; padding:5px 25px;">
+            <p style="padding-top: 27px;"> Please enter your login credentials to continue.</p>
+            <form method="post" action="{% url 'user_auth:login' %}">
+                {% csrf_token %}
+                {% if error %}
+                    <div class="alert alert-danger">
+                        <a class="close" data-dismiss="alert" href="#">x</a>
+                        {{error}}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="username">Username<span>*</span></label>
+                    <input type="text" class="form-control top-space" name="username" id="username" required placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password<span>*</span></label>
+                    <input type="password" class="form-control top-space" name="password" id="password" required placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-color">Submit</button>
+                <p class="top-space" style="font-size: 12px;"> Don't have an account? <span style="color: red;"><a href="{% url 'user_auth:register' %}">Register</a></span></p>
+            </form>
+
+
+        </div>
+    </div>
+{% endblock %}
